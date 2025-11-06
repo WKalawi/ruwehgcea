@@ -496,6 +496,166 @@ menuToggle.addEventListener("click", () => {
       <p>Archbishop Rev. Daniel Were Ohola leads the Ruwe Holy Ghost Church with humility, wisdom, and a divine calling to expand spiritual revival in Siaya County and beyond. His ministry emphasizes unity, holiness, and the transformative power of the Holy Spirit.</p>
     </main>
 
+    <section id="calendar-clock" class="calendar-section">
+  <h2 id="month-year"></h2>
+  <div id="clock"></div>
+  <div class="calendar-nav">
+    <button id="prevMonth">« Previous</button>
+    <button id="nextMonth">Next »</button>
+  </div>
+  <div id="month-calendar" class="month-grid"></div>
+</section>
+
+<style>
+/* ===== CHURCH MONTHLY CALENDAR + CLOCK STYLES ===== */
+.calendar-section {
+  max-width: 360px;
+  margin: 2em auto;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: #e6f0ff; /* light navy blue tone */
+  padding: 1.5em;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+#month-year {
+  color: #002b5c;
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+#clock {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 0.8em;
+  color: #001a33;
+}
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+.calendar-nav button {
+  background: #003366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3em 0.8em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.calendar-nav button:hover {
+  background: #00509e;
+}
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.2em;
+  font-size: 0.85em;
+}
+.day {
+  padding: 0.4em 0;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #dbe2f0;
+}
+.day-header {
+  font-weight: bold;
+  background: #003366;
+  color: #fff;
+}
+.day.event {
+  background: #ffcccc;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.day.event:hover {
+  background: #ffb3b3;
+}
+</style>
+
+<script>
+// ====== CHURCH EVENTS ======
+const events = [
+  { date: '12-12', name: 'Lamb Chir Begins' },
+  { date: '01-15', name: 'Chungo Msalaba' },
+  { date: '01-16', name: 'Luoro Liete Begins' },
+  { date: '01-18', name: 'Luoro Liete Ends' },
+  { date: '01-19', name: 'Ruwe Crusade Begins' },
+  { date: '01-21', name: 'Sap Lawi' },
+  { date: '01-22', name: 'Ruwe Crusade Ends' },
+  { date: '02-26', name: 'Sap Buru (Ash Wednesday)' },
+  { date: '06-07', name: 'Nyuol Roho' },
+  { date: '05-01', name: 'Luoro mar Pastors Month' },
+  { date: '10-20', name: 'Sap Barnaba' }
+];
+
+const monthYear = document.getElementById('month-year');
+const calendarContainer = document.getElementById('month-calendar');
+const tz = 'Africa/Nairobi';
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+function buildCalendar(month, year) {
+  calendarContainer.innerHTML = '';
+  monthYear.textContent = new Date(year, month).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const headers = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  headers.forEach(h => {
+    const hd = document.createElement('div');
+    hd.textContent = h;
+    hd.className = 'day-header';
+    calendarContainer.appendChild(hd);
+  });
+
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement('div');
+    calendarContainer.appendChild(empty);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'day';
+    cell.textContent = d;
+
+    const monthStr = String(month + 1).padStart(2, '0');
+    const dateKey = `${monthStr}-${String(d).padStart(2, '0')}`;
+    const event = events.find(e => e.date === dateKey);
+
+    if (event) {
+      cell.classList.add('event');
+      cell.title = event.name;
+    }
+
+    calendarContainer.appendChild(cell);
+  }
+}
+
+function updateClock() {
+  const time = new Date().toLocaleString('en-US', { timeZone: tz });
+  document.getElementById('clock').textContent = 'EAT Time: ' + time;
+}
+
+document.getElementById('prevMonth').onclick = () => {
+  currentMonth--;
+  if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+  buildCalendar(currentMonth, currentYear);
+};
+document.getElementById('nextMonth').onclick = () => {
+  currentMonth++;
+  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  buildCalendar(currentMonth, currentYear);
+};
+
+buildCalendar(currentMonth, currentYear);
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+
     <!-- FOOTER -->
     <footer>
       <div>Terms & Conditions — Privacy Policy — FAQs</div>
