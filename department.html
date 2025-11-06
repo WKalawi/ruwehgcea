@@ -510,4 +510,12 @@ menuToggle.addEventListener("click", () => {
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>  
+
+  <script>
+  if (window.location.pathname.endsWith(".html")) {
+    const cleanURL = window.location.pathname.replace(".html", "");
+    window.history.replaceState({}, "", cleanURL);
+  }
+</script>
+
 </body></html>
