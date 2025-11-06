@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ruwe Holy Ghost Church of East Africa — Home</title>
+  <meta name="description" content="Ruwe Holy Ghost Church of East Africa - Headquarters in Ruwe, Siaya County" />
+  <style>
+    :root {
+      --accent: #cc001b;
+      --muted: #444;
+      --card: #fff;
+      --bg: #f4f6f8;
+      --maxw: 1150px;
+      --radius: 12px;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: #111;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: var(--maxw);
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      background: #fff url('images/logo.png') center/contain no-repeat;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .brand-title {
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 20px;
+    }
+    .brand-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* NAVIGATION */
+    nav {
+      background: #fff;
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 10px 0;
+      position: relative;
+    }
+    nav a {
+      text-decoration: none;
+      color: #000; /* default black */
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    nav a:hover,
+    nav a:focus,
+    nav a:active {
+      color: var(--accent);
+      background: rgba(0, 51, 204, 0.08);
+    }
+
+    /* Active Page (current tab stays blue) */
+    nav a.active {
+      color: var(--accent);
+      background: rgba(0, 51, 204, 0.1);
+    }
+
+    /* DROPDOWN */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: #fff;
+      min-width: 220px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      top: 42px;
+      left: 0;
+      z-index: 999;
+      text-align: left;
+      padding: 6px 0;
+    }
+    .dropdown-content a {
+      display: block;
+      color: var(--muted);
+      padding: 10px 16px;
+      text-transform: none;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: left;
+    }
+    .dropdown-content a:hover {
+      background: rgba(0,51,204,0.1);
+      color: var(--accent);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(180deg, rgba(179,0,0,0.08), rgba(0,153,255,0.06)), url('assets/images/hero.jpg') center/cover no-repeat;
+      border-radius: var(--radius);
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 18px;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(12,12,12,0.03);
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .archbishop-photo {
+      width: 100%;
+      height: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #eee url('assets/images/were.jpg') center/cover no-repeat;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .hero h1 {
+      margin: 0 0 8px 0;
+      font-size: 26px;
+      color: var(--accent);
+    }
+    .hero .sub {
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .read-more {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* Info Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .card {
+      background: var(--card);
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(10,10,10,0.04);
+      min-height: 120px;
+    }
+    .card h3 {
+      margin: 0 0 8px 0;
+      color: var(--accent);
+    }
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .wide {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+    }
+
+    footer {
+      margin-top: 22px;
+      padding: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .archbishop-photo { margin: 0 auto; }
+      .wide { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+      .logo { width: 70px; height: 70px; }
+    }
+  </style>
+  <style>
+    /* existing styles here */
+
+    /* ✅ Add this anywhere inside the style section */
+    h2 {
+      margin-bottom: 0.75em; /* space below heading */
+    }
+
+    p {
+      margin-top: 0em; /* optional: keeps spacing consistent */
+    }
+  </style>
+  <style>
+    .content {
+      max-width: 1100px;
+      line-height: 1.6;
+      font-family: Arial, sans-serif;
+    }
+
+    .hidden-content {
+      display: none;
+    }
+
+    .read-more-btn {
+      color: #ff000d;
+      cursor: pointer;
+      text-decoration: underline;
+      border: none;
+      background: none;
+      padding: 0;
+      font-size: 1em;
+    }
+  </style>
+<script>
+  // Mobile Menu Toggle
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navLinks = document.querySelector(".nav-links");
+
+  mobileMenu.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+
+  // Active Link Highlight
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add("active");
+    }
+  });
+</script>
+<style>
+  /* Base Navigation Bar */
+.navbar {
+  background-color: #fbfcfd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  font-family: "Arial", sans-serif;
+}
+.logo {
+  color: white;
+  font-size: 20px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+.nav-links li a {
+  color: rgb(204, 7, 7);
+  text-decoration: none;
+  position: relative;
+  padding: 10px;
+}
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #3f07f9;
+}
+
+/* Dropdown Styling */
+.dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: rgb(230, 231, 250);
+  min-width: 200px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+.dropdown-menu li a {
+  color: #2c0ab3;
+  display: block;
+  padding: 10px 15px;
+}
+.dropdown-menu li a:hover {
+  background-color: #fcfcfd;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Mobile Styles */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: rgb(11, 11, 11);
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background-color: #fcfcfc;
+    width: 100%;
+    flex-direction: column;
+    display: none;
+  }
+  .nav-links li {
+    text-align: center;
+    padding: 10px 0;
+  }
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+}
+
+</style>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/690bb7fa300ebf1958ad735f/1j9asdarb';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4494989354932565"
+crossorigin="anonymous"></script>
+<style>
+.ad-container {
+  text-align: center;
+  margin: 2em 0;
+}
+</style>
+
+
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- HEADER -->
+     <div class="brand">
+  <img src="assets/images/logo.png" alt="Ruwe Holy Ghost Church Logo" class="logo" />
+  <div class="brand-title">Ruwe Holy Ghost Church of East Africa</div>
+  <div class="brand-title">West Arch Diocese</div>
+  <div class="brand-sub">Rooted in Faith, United in Spirit — Headquarters in Ruwe, Siaya County</div>
+</div>
+
+    <!-- NAVIGATION -->
+     <nav class="navbar">
+      <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+
+      <!-- History Dropdown -->
+      <li class="dropdown">
+        <a href="history.html">History ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="mango.html">Rev Odong Mango</a></li>
+          <li><a href="musanda.html">Musanda Masacre</a></li>
+          <li><a href="dhoroho.html">Roho Dictionary</a></li>
+        </ul>
+      </li>
+
+      <!-- Leadership Dropdown -->
+      <li class="dropdown">
+        <a href="leadership.html">Leadership ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="archbishop.html">Archbishop's Office</a></li>
+          <li><a href="clergy.html">Clergy</a></li>
+          <li><a href="management.html">Management</a></li>
+          <li><a href="ruwe-elites.html">Ruwe Elites</a></li>
+          <li><a href="national-youth.html">National Youth</a></li>
+        </ul>
+      </li>
+
+      <li><a href="department.html">Departments</a></li>
+      <li><a href="diocese.html">Dioceses</a></li>
+      
+      <!-- Gallery Dropdown -->
+      <li class="dropdown">
+        <a href="gallery.html">Gallery ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="archives.html">Archives</a></li>
+          <li><a href="prayers.html">Prayers</a></li>
+          <li><a href="songs.html">Songs</a></li>
+          <li><a href="gallery-clergy.html">Clergy</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </li>
+
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+    </header>
+
+<!-- Top Bar -->
+
+<!-- Hero Section -->
+<section style="background-image:url('assets/images/hero.jpg');background-size:cover;background-position:center;color:#161616;padding:48px 0;">
+  <div class="wrap">
+    </div>
+</section>
+
+<!-- Main Accordion Section -->
+<section>
+  <div class="wrap">
+    <div class="accordion" id="historyAccordion">
+<div class="content">
+      <!-- Origins of the Roho Movement -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-origins">    
+    <h2>Origins of the Roho Movement</h2>
+  </div>
+  <div class="accordion-content" id="sec-origins">
+    <p>The Ruwe Holy Ghost Church of East Africa began as a Spirit-led movement among the Luo people, growing through prayer, sacrifice, and resilience even in the face of persecution. The origins of the Roho movement are deeply rooted in western Kenya, among the Luo communities of Ruwe in Ugenya and Musanda in Wanga. Long before uniforms or church buildings, the movement began as a spiritual stirring around 1912, when people reported hearing mysterious voices of the Holy Spirit at night—moving through homesteads like wind on grass roofs. Early gatherings took place under trees or inside simple huts, where small groups prayed, fasted, and waited upon God. One of the earliest figures associated with this awakening was Ibrahim Osodo, a young Christian who built a small prayer hut in Ruwe. Here, youth and elders alike would gather to sing, confess sins, and seek visions. These prayer meetings were intense: people trembled, fell to the ground, spoke in unknown tongues, and proclaimed prophecies. This early phase was not yet a church, but a movement of people longing for a deeper, African expression of Christianity free from missionary control.</p>
+    <p>At this time, Christianity among the Luo was mainly taught by Anglican missionaries who emphasized order, sacraments, and written scripture. But the Spirit-led gatherings in Ruwe and surrounding areas introduced emotional prayer, prophetic visions, and repentance through open confession. Community members believed that the Holy Spirit could expose hidden sins such as adultery, beer drinking, and witchcraft. These experiences marked a turning point, where the gospel began to take on a distinctly African voice. Women were also central in these early gatherings—singing hymns, dreaming visions, and calling people to repentance, even though missionaries often discouraged female leadership. These foundations—Spirit, song, confession, and community prayer—laid the groundwork for what would become the Roho faith.</p>
+  </div>
+</div>
+<div class="hidden-content">
+<!-- Early Development (1912–1933) -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-early">
+    <h3>Early Development and Spiritual Foundations (1912–1933)</h3>
+  </div>
+  <div class="accordion-content" id="sec-early">
+    <p>From the 1910s to early 1930s, the movement spread slowly through Ugenya, Alego, and Wanga. It remained tied loosely to Anglican structures, but its followers sought a deeper spiritual life filled with visions, prayer, healing, and moral purity. The small prayer group of Ruwe began attracting local catechists such as Barnaba Walwoho and Lawi Obonyo, who introduced Bible teaching while accepting visions and prophecies as part of God’s work. This combination of scripture and Spirit shaped the identity of the early Roho believers. They adopted practices such as early-morning prayer, fasting, confession of sins before the community, and refusing alcohol. Though they still attended mission churches, they felt spiritually disconnected from the formality of missionary worship.</p>
+    <p>At the same time, the rise of the Nomiya Luo Church under Johana Owalo influenced the environment. Owalo preached that Africans could receive direct revelation from God and did not need European priests. While early Roho believers did not follow Nomiya teachings such as circumcision or Mosaic Law, they were encouraged by the idea that Africans could lead their own churches under God. By the early 1930s, the spiritual hunger and discipline of these groups prepared the ground for the arrival of a prophetic leader who would give the movement new direction—Alfayo Odongo Mango.</p>
+  </div>
+</div>
+
+<!-- Rise of Alfayo Odongo Mango -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-mango">
+    <h3>Rise of Alfayo Odongo Mango and the Road to Musanda</h3>
+  </div>
+  <div class="accordion-content" id="sec-mango">
+    <p>Alfayo Odongo Mango was born in Wanga but raised in the Anglican Christian tradition. Trained by missionaries, he was disciplined, prayerful, and deeply knowledgeable in scripture. Yet, he felt that the church lacked spiritual depth. Around 1916, while praying in the forest of Uriya, Mango experienced a life-changing encounter with the Holy Spirit. He trembled, spoke words not his own, and saw visions of a new covenant for Africans. After this, Mango began gathering believers around prayer, holiness, and rejection of sin. Leaving his training as a mission catechist, he moved to Musanda in Wanga land, where he and his companion Lawi Obonyo formed a prayer community. They preached against immorality, beer drinking, and worldly traditions while encouraging fasting, healing, and Spirit-led worship.</p>
+    <p>By the early 1930s, hundreds of followers had gathered around Mango at Musanda. They lived communally, wore white robes, confessed sins, and waited for the Holy Spirit’s promised power. Mango prophesied of roads, African leadership, iron-roofed houses, and a coming spiritual fire that would purify the land. However, their refusal to work on colonial projects, pay beer taxes, or fully submit to chiefs drew suspicion from colonial administrators and mission churches. Without intending it, Mango and his followers were seen as rebels. The stage was set for a tragic confrontation that would define the Roho identity forever — the fire at Musanda.</p>
+  </div>
+</div>
+<!-- The Fire at Musanda (Mach), 1934 -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-fire">
+    <h3>The Fire at Musanda (Mach), 1934</h3>
+  </div>
+  <div class="accordion-content" id="sec-fire">
+    <p>In early 1934, the small spirit-led community at Musanda reached its most intense point. Hundreds of followers—men, women, and children—had gathered to live a holy life marked by fasting, confession, and prayer. They believed the Holy Spirit was preparing them for a new age of freedom and righteousness. Clad in white robes and carrying prayer staffs, they lived communally, rejecting alcohol, immorality, taxes on beer, and forced colonial labor. Their way of life troubled colonial chiefs and missionaries, who feared rebellion despite the peaceful nature of the followers. Reports were sent to colonial officials, claiming Mango was misleading people and resisting government rule. Tension escalated, and by March 1934, police were ordered to break the gathering apart.</p>
+    <p>On the day of the attack—remembered as <em>Mach</em> (the Fire)—believers were in prayer. Police and local chiefs stormed the settlement, shouting orders to disperse. Many refused to run, believing Mango’s prophecy that God would protect them if they remained still. Shots were fired. Prayer huts were set ablaze. Children cried as flames rose. Women were dragged by force, men beaten, and homes destroyed. Some believers died instantly; others were injured. Mango himself was captured, beaten severely, tied with ropes, and mocked. Witnesses say his blood soaked the earth. He was taken away and died from his injuries shortly after. His burial was quick and unmarked. Yet this tragedy became the foundation of Roho identity. Like Christ, Mango’s sacrifice was seen not as defeat but as a covenant sealed in blood—a new beginning for the African church born out of suffering.</p>
+  </div>
+</div>
+
+<!-- Rebuilding After the Fire -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-rebuild">
+    <h3>Rebuilding After the Fire: Ruwe as the Spiritual Homeland</h3>
+  </div>
+  <div class="accordion-content" id="sec-rebuild">
+    <p>After the destruction at Musanda and the death of Mango, believers scattered back to their homes in Siaya, Ugenya, Alego, and beyond. Many were traumatized, grieving the loss of their prophet. Yet they carried the story of Mango’s suffering and the fire wherever they went. Ruwe became the new spiritual center of the movement. Elders such as Isaya Goro and Barnaba Walwoho began gathering the faithful again, preserving Mango’s teachings, hymns, and memories. Annual prayer meetings were established in Ruwe to commemorate the fire. Followers wore white, carried staffs, and sang songs of sorrow and victory. They told the story of Mango to their children, ensuring that the memory of his sacrifice would never die.</p>
+    <p>During this time, the movement took on a more defined structure. Leaders were recognized according to spiritual gifts—prophets, dreamers, healers, singers, and elders. Worship still happened under trees or in simple mud-and-grass huts, but the real church was spiritual, built in memory of Mango and the Holy Spirit’s presence. The followers began identifying themselves as <em>Joroho</em>—people of the Spirit. They developed a sacred prayer language called <em>Dhoroho</em>, believed to be given directly by the Holy Spirit. The trauma of Musanda did not destroy the movement; instead, it refined it. Ruwe stood as a symbol of survival and new birth, a place where suffering turned into hope.</p>
+  </div>
+</div>
+
+<!-- Spread to South Nyanza -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-spread">
+    <h3>Spread of the Roho Faith to South Nyanza</h3>
+  </div>
+  <div class="accordion-content" id="sec-spread">
+    <p>Following the fire and scattering of believers, the Roho faith began to spread far beyond Siaya and Ugenya. Survivors of Musanda walked across villages in Uyoma, Gem, Kendu Bay, Karachuonyo, Sakwa, and even into Migori and Kisii. They did not carry wealth, books, or formal training—only staffs, drums, white garments, and the story of Mango’s blood and the fire. They preached that the same Holy Spirit who came at Pentecost had visited Africa and called believers to repentance and holiness. They testified that Mango had died like Christ, sealing a covenant with God on behalf of Africans. Their message resonated with people weary of colonial injustices, taxes, loss of land, and forced labor.</p>
+    <p>In South Nyanza, many were cautious at first, especially elders influenced by missionary teaching. But gradually, families began hosting Roho prayer gatherings in their courtyards and fields. Women formed spirit choirs, children learned sacred songs, and men carved prayer staffs with small wooden crosses. Pilgrimages were made to Ruwe, and later to Musanda, to pray where Mango had walked. The Roho message of suffering, hope, and freedom found deep roots in the hearts of people across the Lake Victoria region, where the faith continues to thrive today.</p>
+  </div>
+</div>
+<!-- Relationship with the Nomiya Luo Church -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-nomiya">
+    <h3>Relationship with the Nomiya Luo Church</h3>
+  </div>
+  <div class="accordion-content" id="sec-nomiya">
+    <p>The Roho movement did not emerge in isolation. One of its earliest spiritual neighbors was the Nomiya Luo Church, founded by Johana Owalo around 1912. Owalo claimed to have been taken to heaven by the angel Gabriel and commanded to start a church for Africans. The Nomiya Church adopted practices such as observing the Sabbath on Saturday, circumcision, and adherence to parts of the Mosaic Law. This church proved that Africans could form their own religious institutions free from missionary rule. Many early Roho elders were aware of Nomiya teachings, and some had relatives within the church.</p>
+    <p>However, despite sharing a spirit of African religious independence, the Roho movement chose a different path. It did not adopt circumcision, Old Testament legalism, or polygamy, as some Nomiya groups did. Instead, it emphasized the Holy Spirit, visions, repentance, and purity of the heart. While the Nomiya Church looked to the laws of Moses, Roho Christians believed they were living in a new covenant sealed by the Holy Spirit and the blood of Alfayo Mango. Relations between the two movements were mostly peaceful, though each maintained theological differences. Roho believers saw themselves not as imitators of Nomiya, but as people of the Spirit sent to complete the work of God among Africans.</p>
+  </div>
+</div>
+
+<!-- Division of the Church -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-division">
+    <h3>Division of the Church and Conflict After Mango’s Death</h3>
+  </div>
+  <div class="accordion-content" id="sec-division">
+    <p>After the death of Alfayo Mango in 1934, the movement faced a difficult question: who would lead the believers now? Mango had been the spiritual center, prophet, and guide for the community. His death created both deep sorrow and uncertainty. Some elders believed leadership should return to Ruwe, where the Spirit had first appeared in 1912. Others in Musanda felt that leadership should remain in Wanga, where Mango had lived and died. This disagreement laid the foundation for division within the movement. Colonial authorities, fearing unrest, urged Roho elders to register an official church so gatherings could be monitored. Thus, the Holy Ghost Church of East Africa (HGCEA) was formally registered.</p>
+    <p>Yet registration did not resolve the internal conflicts. The Ruwe group, led by elders like Isaya Goro and Barnaba Walwoho, held firmly to the original teachings of humility, confession, and spiritual silence. They discouraged political involvement and emphasized waiting on the Spirit. Meanwhile, another faction based in Musanda felt they were the rightful guardians of Mango’s legacy since his blood was shed there. Over time, this group became known as Roho Musanda. While both groups honored Mango and the Holy Spirit, differences grew regarding leadership, symbols, and worship practices. The pain of division was felt across the community, yet both sides remained committed to the core message of the Spirit.</p>
+  </div>
+</div>
+
+<!-- Emergence of Roho Musalaba -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-musalaba">
+    <h3>Emergence of Roho Musalaba (Holy Spirit Cross Church)</h3>
+  </div>
+  <div class="accordion-content" id="sec-musalaba">
+    <p>Out of the tensions and divisions following Mango’s death emerged a distinct group known as Roho Musalaba—the Holy Spirit Cross Church. This group placed strong emphasis on the symbol of the cross, representing suffering and sacrifice. They believed Mango’s death was not only a spiritual covenant but also a parallel to the crucifixion of Christ. In this tradition, believers began carrying carved wooden crosses on their staffs and during processions. Their hymns focused on pain, redemption, and the blood shed at Musanda. They wore white robes but also included red threads or crosses to symbolize blood and sacrifice.</p>
+    <p>Roho Musalaba grew especially in South Nyanza and among communities familiar with hardship—famine, displacement, and colonial violence. Their processions often included weeping, kneeling, and symbolic acts of laying burdens at the cross. They sang songs like <em>“Wuon Mach Nyak Kristo”</em> (Lord of the Fire, Child of Christ), reflecting both the Musanda fire and Christ’s suffering. Though doctrinal differences with the Ruwe group existed, both traditions remained rooted in the memory of Mango and the power of the Holy Spirit. To this day, Roho Musalaba remains one of the significant branches of the larger Roho tradition.</p>
+  </div>
+</div>
+<!-- Modern Joroho Church -->
+<div class="accordion-item">
+  <div class="accordion-header" data-target="sec-modern">
+    <h3>Post-Independence and the Modern Joroho Church</h3>
+  </div>
+  <div class="accordion-content" id="sec-modern">
+    <p>Kenya’s independence in 1963 marked a new era for the Joroho movement. Although political freedom was achieved, economic hardship, land pressures, and social change continued. However, the Roho believers now practiced their faith with less interference from colonial authorities. They built more permanent churches, trained new leaders, and organized annual pilgrimages to Ruwe, Musanda, and other sacred sites. Elders such as Barnaba Walwoho, Andrea Okoyo, and others preserved Mango’s teachings through oral history, hymns, and rituals. Pilgrims walked long distances barefoot to sacred trees and prayer grounds, carrying staffs, drums, and sacred gourds, in memory of Mango and the Musanda fire.</p>
+    <p>But modernity brought challenges. Urban migration drew young people to Nairobi, Kisumu, and Mombasa. Pentecostal and charismatic churches with music instruments, loud worship, and promises of prosperity attracted some Joroho youth. Debates emerged within the church—should instruments be allowed? Should women become bishops? Some elders felt these changes threatened the purity of the original vision. Others embraced gradual reform, allowing hymn translation, structured teaching, and formal education for clergy. Despite differences, the essence of the faith remains unchanged. To this day, the Joroho gather in white robes, barefoot on holy ground, praying in silence until the Spirit moves. They lay hands on the sick, sing hymns of suffering and hope, and remember the blood of Mango and the fire of Musanda as the foundation of their spiritual identity.</p>
+  </div>
+</div>
+</div>
+<div class="read-more-box">
+  <button id="readMoreBtn" class="read-more">Read more — show full history</button>
+</div>
+</div> <!-- End of Accordion -->
+</div>
+</section>
+<!-- Accordion Script -->
+<script>
+document.querySelectorAll('.accordion-header').forEach(function(header) {
+  header.addEventListener('click', function() {
+    var targetId = header.getAttribute('data-target');
+    var content = document.getElementById(targetId);
+    var icon = header.querySelector('.toggle-icon');
+
+    var isOpen = content.classList.contains('open');
+    if (isOpen) {
+      content.style.maxHeight = null;
+      content.classList.remove('open');
+      icon.textContent = '+';
+    } else {
+      document.querySelectorAll('.accordion-content.open').forEach(function(openContent) {
+        openContent.style.maxHeight = null;
+        openContent.classList.remove('open');
+        var openIcon = document.querySelector('[data-target="' + openContent.id + '"] .toggle-icon');
+        if (openIcon) openIcon.textContent = '+';
+      });
+      content.classList.add('open');
+      content.style.maxHeight = content.scrollHeight + "px";
+      icon.textContent = '−';
+    }
+  });
+});
+
+// Expand / Collapse All
+var expandBtn = document.getElementById('expandAll');
+var allOpen = false;
+if (expandBtn) {
+  expandBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var contents = document.querySelectorAll('.accordion-content');
+    if (!allOpen) {
+      contents.forEach(function(c) {
+        c.classList.add('open');
+        c.style.maxHeight = c.scrollHeight + "px";
+        var s = document.querySelector('[data-target="' + c.id + '"] .toggle-icon');
+        if (s) s.textContent = '−';
+      });
+      expandBtn.textContent = 'Show less — collapse all';
+      allOpen = true;
+    } else {
+      contents.forEach(function(c) {
+        c.classList.remove('open');
+        c.style.maxHeight = null;
+        var s = document.querySelector('[data-target="' + c.id + '"] .toggle-icon');
+        if (s) s.textContent = '+';
+      });
+      expandBtn.textContent = 'Read more — expand all';
+      allOpen = false;
+    }
+  });
+}
+</script>
+<script>
+    const btn = document.getElementById('readMoreBtn');
+    const hiddenContent = document.querySelector('.hidden-content');
+
+    btn.addEventListener('click', () => {
+      if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
+        hiddenContent.style.display = 'block';
+        btn.textContent = 'Read less';
+      } else {
+        hiddenContent.style.display = 'none';
+        btn.textContent = 'Read more';
+      }
+    });
+  </script>
+<style>
+
+.read-more {
+  background-color: #b30000; /* white button inside red box */
+  color: #fefefe; /* red text */
+  border: none;
+  border-radius: 30px;
+  padding: 1em 2em;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+</style>
+<!-- Footer -->
+<footer style="background:#d4d3d3;color:#fff;">
+  <footer>
+      <div>Terms & Conditions — Privacy Policy — FAQs</div>
+      <div style="font-weight:700; color:var(--muted)">© <span id="year"></span> Ruwe Holy Ghost Church — All Rights Reserved</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+
+</body>
+</html>

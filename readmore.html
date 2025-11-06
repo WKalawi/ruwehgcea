@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read More Example</title>
+  <style>
+    .content {
+      max-width: 600px;
+      line-height: 1.6;
+      font-family: Arial, sans-serif;
+    }
+
+    .hidden-content {
+      display: none;
+    }
+
+    .read-more-btn {
+      color: #007BFF;
+      cursor: pointer;
+      text-decoration: underline;
+      border: none;
+      background: none;
+      padding: 0;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <p>This is the first paragraph that will always be visible. It introduces the essay and gives the reader an overview.</p>
+    
+    <div class="hidden-content">
+      <p>This is the second paragraph that will be hidden initially. It contains more details and insights about the topic.</p>
+      <p>This is the third paragraph. It expands the argument further and provides supporting examples and evidence.</p>
+      <p>This is the concluding paragraph that wraps up the essay and provides a final reflection.</p>
+    </div>
+
+    <button class="read-more-btn" id="readMoreBtn">Read more</button>
+  </div>
+
+  <script>
+    const btn = document.getElementById('readMoreBtn');
+    const hiddenContent = document.querySelector('.hidden-content');
+
+    btn.addEventListener('click', () => {
+      if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
+        hiddenContent.style.display = 'block';
+        btn.textContent = 'Read less';
+      } else {
+        hiddenContent.style.display = 'none';
+        btn.textContent = 'Read more';
+      }
+    });
+  </script>
+
+</body>
+</html>
