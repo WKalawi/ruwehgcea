@@ -421,6 +421,42 @@ crossorigin="anonymous"></script>
   margin: 2em 0;
 }
 </style>
+<style>
+#donate-section {
+  background: #f9fbff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(45, 45, 46, 0.1);
+}
+#donate-section form {
+  display: flex;
+  flex-direction: column;
+}
+#donate-section label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+#donate-section input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+#donate-section button {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgb(171, 3, 3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#donate-section button:hover {
+  background: #97030b;
+}
+</style>
 
 </head>
 <script>
@@ -507,7 +543,25 @@ menuToggle.addEventListener("click", () => {
 <section class="hero" style="background-image:url('/assets/images/hero-sm.jpg')">
   <div class="hero-inner"><h1>DONATE</h1></div>
 </section>
+
 <main class='wrap section'><p>Support our ministries via local giving options. Contact church treasurer for details.</p></main>
+<section id="donate-section">
+  <h2>Make a Donation</h2>
+
+  <form id="donationForm">
+    <label>Enter Code (Diocese / Pastorate / Church):</label>
+    <input type="text" id="code" name="code" required placeholder="e.g., 010101">
+
+    <label>Detected Name:</label>
+    <input type="text" id="detectedName" readonly placeholder="Name will appear here">
+
+    <label>Donation Amount (KES):</label>
+    <input type="number" id="amount" name="amount" required placeholder="e.g., 500">
+
+    <button type="button" id="lookupBtn">Check Code</button>
+    <button type="submit" id="payBtn" disabled>Proceed to Pay</button>
+  </form>
+</section>
 
 <section id="calendar-clock" class="calendar-section">
   <h2 id="month-year"></h2>
@@ -686,6 +740,48 @@ updateClock();
     const cleanURL = window.location.pathname.replace(".html", "");
     window.history.replaceState({}, "", cleanURL);
   }
+</script>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbxqfnhCVeodu6i82r8cifl2Xqt0GHhojPljsBVbaY5tBx8pHjM4T9YmzYiVitF3nsXf/exec"; // Replace with your Google Apps Script Web App URL
+
+document.getElementById("lookupBtn").addEventListener("click", async () => {
+  const code = document.getElementById("code").value.trim();
+  if (!code) return alert("Please enter a code.");
+
+  try {
+    const res = await fetch(`${API_URL}?code=${code}`);
+    const info = await res.json();
+
+    if (info && info.name) {
+      document.getElementById("detectedName").value = `${info.type}: ${info.name}`;
+      document.getElementById("payBtn").disabled = false;
+      alert(`${info.type} detected: ${info.name}`);
+    } else {
+      alert("Code not found. Please check the code and try again.");
+    }
+  } catch (err) {
+    alert("Error connecting to server. Please try again later.");
+  }
+});
+
+// Confirm before payment
+document.getElementById("donationForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("detectedName").value;
+  const amount = document.getElementById("amount").value;
+
+  if (!name || !amount) {
+    alert("Please check the code and enter the amount.");
+    return;
+  }
+
+  const confirmPay = confirm(`Confirm payment of KES ${amount} to ${name}?`);
+  if (confirmPay) {
+    // TODO: integrate with Pesapal or M-Pesa API
+    alert("Payment processing... (Integrate Pesapal next)");
+  }
+});
 </script>
 
 </body></html>
