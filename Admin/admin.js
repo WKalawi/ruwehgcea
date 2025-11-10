@@ -1,3 +1,70 @@
+// ADMIN LOGIN HANDLER (works from main website)
+document.addEventListener("DOMContentLoaded", () => {
+  const adminBtn = document.getElementById("adminBtn");
+  const adminModal = document.getElementById("adminModal");
+  const closeModal = document.getElementById("closeModal");
+  const loginBtn = document.getElementById("loginBtn");
+
+  if (adminBtn) {
+    adminBtn.addEventListener("click", () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        // Already logged in — go straight to dashboard
+        window.location.href = "admin/index.html";
+      } else {
+        adminModal.style.display = "block";
+      }
+    });
+  }
+
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      adminModal.style.display = "none";
+    });
+  }
+
+  window.addEventListener("click", (event) => {
+    if (event.target === adminModal) {
+      adminModal.style.display = "none";
+    }
+  });
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", async () => {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!username || !password) {
+        document.getElementById("loginMessage").textContent =
+          "Please enter both fields.";
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("token", data.token);
+          window.location.href = "admin/index.html";
+        } else {
+          document.getElementById("loginMessage").textContent =
+            data.error || "Invalid credentials.";
+        }
+      } catch (err) {
+        document.getElementById("loginMessage").textContent =
+          "Server error. Please try again later.";
+      }
+    });
+  }
+});
+
+
+
 let token = null;
 
 // DOM elements
@@ -200,3 +267,99 @@ logoutBtn.onclick=()=>{
 
 // Initial load
 fetchLeaders();
+
+// Elements
+const loginForm = document.getElementById("loginForm");
+const dashboard = document.getElementById("dashboard");
+const forgotContainer = document.getElementById("forgotContainer");
+const loginMessage = document.getElementById("loginMessage");
+const passwordMessage = document.getElementById("passwordMessage");
+const resetMessage = document.getElementById("resetMessage");
+
+// Check token on page load
+const token = localStorage.getItem("adminToken");
+if (token) showDashboard();
+
+// --- Login ---
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  loginMessage.textContent = "";
+  
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
+  });
+  const data = await res.json();
+  if (res.ok) {
+    localStorage.setItem("adminToken", data.token);
+    showDashboard();
+  } else loginMessage.textContent = data.error || "Login failed";
+});
+
+// --- Show Dashboard ---
+function showDashboard() {
+  loginForm.classList.add("hidden");
+  forgotContainer.classList.add("hidden");
+  dashboard.classList.remove("hidden");
+  fetchLeaders();
+}
+
+// --- Logout ---
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  localStorage.removeItem("adminToken");
+  dashboard.classList.add("hidden");
+  loginForm.classList.remove("hidden");
+});
+
+// --- Fetch Leaders ---
+async function fetchLeaders() {
+  const token = localStorage.getItem("adminToken");
+  const res = await fetch("/api/leaders", {
+    headers: { "Authorization": "Bearer " + token }
+  });
+  const leaders = await res.json();
+  const tbody = document.querySelector("#leadersTable tbody");
+  tbody.innerHTML = leaders.map(l => `<tr>
+    <td>${l.first}</td>
+    <td>${l.last}</td>
+    <td>${l.position}</td>
+    <td>${l.email}</td>
+  </tr>`).join("");
+}
+
+// --- Change Password ---
+document.getElementById("changePasswordBtn").addEventListener("click", async () => {
+  const oldPassword = document.getElementById("oldPassword").value;
+  const newPassword = document.getElementById("newPassword").value;
+  const token = localStorage.getItem("adminToken");
+  passwordMessage.textContent = "";
+
+  const res = await fetch("/api/change-password", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+    body: JSON.stringify({ oldPassword, newPassword })
+  });
+  const data = await res.json();
+  passwordMessage.textContent = res.ok ? "Password changed successfully" : data.error;
+});
+
+// --- Forgot Password ---
+document.getElementById("forgotPasswordBtn").addEventListener("click", () => {
+  loginForm.classList.add("hidden");
+  forgotContainer.classList.remove("hidden");
+});
+
+// --- Send Reset Link ---
+document.getElementById("sendResetBtn").addEventListener("click", async () => {
+  const email = document.getElementById("resetEmail").value;
+  resetMessage.textContent = "";
+  const res = await fetch("/api/forgot-password", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email })
+  });
+  const data = await res.json();
+  resetMessage.textContent = data.message || data.error;
+});

@@ -513,27 +513,36 @@ menuToggle.addEventListener("click", () => {
 </nav>
     </header>
 
-<title>RHGCEA Admin Dashboard</title>
+<title>RHGCEA Admin</title>
 <style>
-body { font-family: Arial, sans-serif; margin:0; padding:0; }
-header { background:#004080; color:white; padding:10px; display:flex; justify-content:space-between; align-items:center; }
-h1 { margin:0; }
-button { margin:5px; padding:5px 10px; }
-table { width:100%; border-collapse: collapse; margin-top:20px; }
-th, td { border:1px solid #ccc; padding:8px; text-align:left; }
-th { background:#eee; }
-form input { display:block; margin:5px 0; padding:5px; width:250px; }
-#messages { color:red; margin:5px 0; }
-.hidden { display:none; }
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .hidden { display: none; }
+  .admin-button { position: fixed; top: 10px; right: 10px; background: navy; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  table, th, td { border: 1px solid #ccc; }
+  th, td { padding: 8px; text-align: left; }
+  input, button { margin: 5px 0; padding: 8px; }
+  button { cursor: pointer; }
 </style>
 </head>
 <body>
-<header>
-  <h1>RHGCEA Leaders</h1>
-  <button id="adminBtn">Admin</button>
-</header>
 
-<main>
+<h1>RHGCEA Admin Panel</h1>
+
+<!-- Login Form -->
+<div id="loginForm">
+  <h2>Admin Login</h2>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button id="loginBtn">Login</button>
+  <button id="forgotPasswordBtn">Forgot Password?</button>
+  <p id="loginMessage" style="color:red;"></p>
+</div>
+
+<!-- Dashboard Content -->
+<div id="dashboard" class="hidden">
+  <button id="logoutBtn">Logout</button>
+  <h2>Leaders</h2>
   <table id="leadersTable">
     <thead>
       <tr>
@@ -541,11 +550,19 @@ form input { display:block; margin:5px 0; padding:5px; width:250px; }
         <th>Last Name</th>
         <th>Position</th>
         <th>Email</th>
-        <th id="adminActionsHeader" class="hidden">Actions</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
+
+  <!-- Change Password -->
+  <h3>Change Password</h3>
+  <input type="password" id="oldPassword" placeholder="Old Password"><br>
+  <input type="password" id="newPassword" placeholder="New Password"><br>
+  <button id="changePasswordBtn">Change Password</button>
+  <p id="passwordMessage" style="color:red;"></p>
+</div>
+
 
   <!-- Admin Login / Forgot / Reset -->
   <div id="adminModal" class="hidden">
