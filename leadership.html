@@ -1067,6 +1067,93 @@ nav ul li a {
 }
 </style>
 
+<!-- ADMIN LOGIN (Top Right, Click to Reveal Form) -->
+<div class="admin-login">
+  <span class="admin-toggle" onclick="toggleAdminLogin()">Admin</span>
+  <div class="admin-form" id="adminForm">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="login-message" style="color:red; font-size: 13px;"></p>
+  </div>
+  <button class="logout-btn" id="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<style>
+  /* Positioning for the Admin Section */
+  .admin-login {
+    position: fixed;
+    top: 10px;
+    right: 25px;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+  }
+
+  .admin-toggle {
+    cursor: pointer;
+    color: #2b4a8b;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .admin-toggle:hover {
+    text-decoration: underline;
+  }
+
+  .admin-form {
+    display: none;
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 200px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .admin-form input {
+    display: block;
+    width: 95%;
+    margin: 5px auto;
+    padding: 6px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .admin-form button {
+    width: 100%;
+    background-color: #2b4a8b;
+    color: white;
+    border: none;
+    padding: 7px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .admin-form button:hover {
+    background-color: #1e3262;
+  }
+
+  .logout-btn {
+    display: none;
+    background-color: #e04a4a;
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .logout-btn:hover {
+    background-color: #c73838;
+  }
+</style>
+
+
 </head>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -1233,28 +1320,125 @@ menuToggle.addEventListener("click", () => {
 
   <!-- Management -->
   <div class="tab-panel" id="management">
-    <h2>Church Management</h2>
-    <table class="management-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Position</th>
-          <th>Office</th>
-          <th>Contact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Samwel Odero</td>
-          <td>Chairman</td>
-          <td>Headquarters</td>
-          <td>paul.mutua@church.org</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <h2>Church Management</h2>
+  <table class="management-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Contact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Samwel Ezekiel Odero</td>
+        <td>Chairman</td>
+        <td class="admin-only">samwel.odero@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>George Onyango</td>
+        <td>Assistant Chair</td>
+        <td class="admin-only">george.onyango@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Timothy Oreta</td>
+        <td>Secretary General</td>
+        <td class="admin-only">timothy.oreta@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Musa Kazi</td>
+        <td>Deputy Secretary</td>
+        <td class="admin-only">musa.kazi@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Lucas Owino</td>
+        <td>Treasurer</td>
+        <td class="admin-only">lucas.owino@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Yussuf Ooro Odongo</td>
+        <td>Organizing Secretary</td>
+        <td class="admin-only">yussuf.odongo@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Pst Samwel Okeyo</td>
+        <td>Assistant Organizing Secretary</td>
+        <td class="admin-only">samwel.okeyo@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Eunice Were Ng’ani</td>
+        <td>Internal Auditor</td>
+        <td class="admin-only">eunice.ngani@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Elmard Wara</td>
+        <td>Finance Records</td>
+        <td class="admin-only">elmard.wara@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Turphosa Regina Adem</td>
+        <td>Financial Advisor</td>
+        <td class="admin-only">turphosa.adem@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <th colspan="3">Arch Bishop’s Advisors</th>
+      </tr>
+      <tr>
+        <td>Musa Kazi</td>
+        <td>Advisor</td>
+        <td class="admin-only">musa.kazi@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Counsel Alfayo Ng’ani</td>
+        <td>Advisor</td>
+        <td class="admin-only">alfayo.ngani@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Bishop Alfayo Bobo</td>
+        <td>Advisor</td>
+        <td class="admin-only">alfayo.bobo@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>George Onyango</td>
+        <td>Advisor</td>
+        <td class="admin-only">george.onyango@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Yussuf Ooro Odongo</td>
+        <td>Advisor</td>
+        <td class="admin-only">yussuf.odongo@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Sister Regina Auma</td>
+        <td>Advisor</td>
+        <td class="admin-only">regina.auma@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Samwel Odero</td>
+        <td>Advisor</td>
+        <td class="admin-only">samwel.odero@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Alfayo Onyuro</td>
+        <td>Advisor</td>
+        <td class="admin-only">alfayo.onyuro@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Isaiah Okwany</td>
+        <td>Advisor</td>
+        <td class="admin-only">isaiah.okwany@ruhwehgcea.com</td>
+      </tr>
+      <tr>
+        <td>Isaiah Otoyi</td>
+        <td>Advisor</td>
+        <td class="admin-only">isaiah.otoyi@ruhwehgcea.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-  <<!-- National Youth -->
+
+  <!-- National Youth -->
 <div class="tab-panel" id="youth">
   <h2>National Youth Leadership</h2>
   <div class="youth-row">
@@ -1582,6 +1766,45 @@ updateClock();
   }
 </script>
 
+<script>
+  const adminCredentials = { username: "admin", password: "admin" };
 
+  function toggleAdminLogin() {
+    const form = document.getElementById("adminForm");
+    form.style.display = form.style.display === "block" ? "none" : "block";
+  }
+
+  function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const message = document.getElementById("login-message");
+
+    if (username === adminCredentials.username && password === adminCredentials.password) {
+      document.body.classList.add("admin-logged-in");
+      document.getElementById("adminForm").style.display = "none";
+      document.querySelector(".admin-toggle").style.display = "none";
+      document.getElementById("logout-btn").style.display = "inline-block";
+      localStorage.setItem("isAdmin", "true");
+      message.textContent = "";
+    } else {
+      message.textContent = "Invalid login. Try again.";
+    }
+  }
+
+  function logout() {
+    document.body.classList.remove("admin-logged-in");
+    document.querySelector(".admin-toggle").style.display = "inline";
+    document.getElementById("logout-btn").style.display = "none";
+    localStorage.removeItem("isAdmin");
+  }
+
+  window.onload = () => {
+    if (localStorage.getItem("isAdmin") === "true") {
+      document.body.classList.add("admin-logged-in");
+      document.querySelector(".admin-toggle").style.display = "none";
+      document.getElementById("logout-btn").style.display = "inline-block";
+    }
+  };
+</script>
   </body>
   </html>
