@@ -1,1 +1,19 @@
-// Placeholder for public/styles.css
+body { font-family: Arial, sans-serif; padding: 20px; }
+header { display:flex; justify-content: space-between; align-items:center; }
+table { width:100%; border-collapse: collapse; margin-top:20px; }
+th, td { padding:8px; border:1px solid #832222; text-align:left; }
+#adminModal, #leaderFormContainer, #passwordFormContainer { 
+  position: fixed; top: 20%; left: 40%; 
+  background: #083fcc; padding: 20px; border: 1px solid #c40b0b; 
+}
+input { margin: 5px 0; padding:5px; width:200px; }
+button { margin: 5px; padding:5px 10px; }
+
+
+#adminModal a {
+  cursor: pointer;
+  color: #1a73e8;
+}
+#adminModal a:hover {
+  text-decoration: underline;
+}
