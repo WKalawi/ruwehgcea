@@ -512,74 +512,97 @@ menuToggle.addEventListener("click", () => {
     </ul>
 </nav>
     </header>
-  <title>RHGCEA Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
+
+<title>RHGCEA Admin Dashboard</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; }
+header { background:#004080; color:white; padding:10px; display:flex; justify-content:space-between; align-items:center; }
+h1 { margin:0; }
+button { margin:5px; padding:5px 10px; }
+table { width:100%; border-collapse: collapse; margin-top:20px; }
+th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+th { background:#eee; }
+form input { display:block; margin:5px 0; padding:5px; width:250px; }
+#messages { color:red; margin:5px 0; }
+.hidden { display:none; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>RHGCEA Leaders</h1>
-    <button id="adminBtn">Admin</button>
-  </header>
+<header>
+  <h1>RHGCEA Leaders</h1>
+  <button id="adminBtn">Admin</button>
+</header>
 
-  <main>
-    <table id="leadersTable">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Position</th>
-          <th>Phone Number</th>
-          <th id="adminActionsHeader" style="display:none;">Actions</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+<main>
+  <table id="leadersTable">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Position</th>
+        <th>Email</th>
+        <th id="adminActionsHeader" class="hidden">Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <!-- Add/Edit Leader Form -->
-    <div id="leaderFormContainer" style="display:none;">
-      <h3 id="leaderFormTitle">Add Leader</h3>
-      <input type="text" id="leaderFirst" placeholder="First Name"><br>
-      <input type="text" id="leaderLast" placeholder="Last Name"><br>
-      <input type="text" id="leaderPosition" placeholder="Position"><br>
-      <input type="email" id="leaderEmail" placeholder="Email"><br>
-      <button id="saveLeaderBtn">Save</button>
-      <button id="cancelLeaderBtn">Cancel</button>
-    </div>
-
-<div id="adminCreateContainer" style="display:none;">
-  <h3>Create New Admin</h3>
-  <input type="text" id="newAdminUsername" placeholder="Username"><br>
-  <input type="text" id="newAdminDisplay" placeholder="Display Name"><br>
-  <input type="email" id="newAdminEmail" placeholder="Email"><br>
-  <input type="password" id="newAdminPassword" placeholder="Password"><br>
-  <button id="createAdminBtn">Create Admin</button>
-  <p id="adminCreateMsg" style="color:red;"></p>
-</div>  
-
-    <!-- Change Password Form -->
-    <div id="passwordFormContainer" style="display:none;">
-      <h3>Change Password</h3>
-      <input type="password" id="oldPassword" placeholder="Old Password"><br>
-      <input type="password" id="newPassword" placeholder="New Password"><br>
-      <button id="changePasswordBtn">Change Password</button>
-      <p id="passwordMessage" style="color:red;"></p>
-    </div>
-  </main>
-
-  <!-- Admin login modal -->
-  <div id="adminModal" style="display:none;">
+  <!-- Admin Login / Forgot / Reset -->
+  <div id="adminModal" class="hidden">
     <h2>Admin Login</h2>
-    <input type="text" id="username" placeholder="Username"><br>
-    <input type="password" id="password" placeholder="Password"><br>
+    <input type="text" id="loginUsername" placeholder="Username">
+    <input type="password" id="loginPassword" placeholder="Password">
     <button id="loginBtn">Login</button>
-    <button id="closeBtn">Close</button>
-    <p id="loginMessage" style="color:red;"></p>
+    <p id="loginMsg"></p>
+    <p><a href="#" id="showForgot">Forgot Password?</a></p>
+
+    <div id="forgotContainer" class="hidden">
+      <h3>Reset Password</h3>
+      <input type="email" id="forgotEmail" placeholder="Enter your email">
+      <button id="sendResetBtn">Send Reset Code</button>
+      <p id="forgotMsg"></p>
+    </div>
+
+    <div id="resetContainer" class="hidden">
+      <h3>Enter Reset Code & New Password</h3>
+      <input type="text" id="resetCode" placeholder="Enter code received">
+      <input type="password" id="resetNewPassword" placeholder="New password">
+      <button id="resetPasswordBtn">Reset Password</button>
+      <p id="resetMsg"></p>
+    </div>
   </div>
 
-  <input type="password" id="password" placeholder="Password"><br>
-<a href="forgot-password.html" style="font-size:0.9em; color:blue; text-decoration:underline;">Forgot Password?</a><br>
-<button id="loginBtn">Login</button>
-<p id="loginMessage" style="color:red;"></p>
-  <script src="admin.js"></script>
+  <!-- Admin Panel -->
+  <div id="adminPanel" class="hidden">
+    <h3>Welcome, <span id="adminName"></span></h3>
+
+    <h4>Add/Edit Leader</h4>
+    <input type="hidden" id="editLeaderId">
+    <input type="text" id="leaderFirst" placeholder="First Name">
+    <input type="text" id="leaderLast" placeholder="Last Name">
+    <input type="text" id="leaderPosition" placeholder="Position">
+    <input type="email" id="leaderEmail" placeholder="Email">
+    <button id="saveLeaderBtn">Save</button>
+    <button id="cancelLeaderBtn">Cancel</button>
+    <p id="leaderMsg"></p>
+
+    <h4>Change Password</h4>
+    <input type="password" id="oldPassword" placeholder="Old Password">
+    <input type="password" id="newPassword" placeholder="New Password">
+    <button id="changePasswordBtn">Change Password</button>
+    <p id="passwordMsg"></p>
+
+    <h4>Create New Admin</h4>
+    <input type="text" id="newAdminUsername" placeholder="Username">
+    <input type="text" id="newAdminDisplay" placeholder="Display Name">
+    <input type="email" id="newAdminEmail" placeholder="Email">
+    <input type="password" id="newAdminPassword" placeholder="Password">
+    <button id="createAdminBtn">Create Admin</button>
+    <p id="adminCreateMsg"></p>
+
+    <button id="logoutBtn">Logout</button>
+  </div>
+</main>
+
+<script src="admin.js"></script>
 </body>
-</html>

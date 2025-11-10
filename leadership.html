@@ -1175,7 +1175,55 @@ nav ul li a {
     });
   });
 </script>
+<style>
+  header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
+.navbar {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #001f4d;
+  font-weight: 600;
+}
+
+.admin-btn {
+  background-color: #001f4d;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.admin-btn:hover {
+  background-color: #003366;
+}
+
+</style>
 <script>
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector("nav ul");
@@ -1255,6 +1303,8 @@ menuToggle.addEventListener("click", () => {
       <li><a href="donate.html">Donate</a></li>
     </ul>
 </nav>
+
+  <button id="adminBtn" class="admin-btn">Admin</button>
     </header>
   
   <!-- Leadership Tabs Section -->
@@ -1805,6 +1855,29 @@ updateClock();
       document.getElementById("logout-btn").style.display = "inline-block";
     }
   };
+</script>
+<script>
+  // Select the elements
+  const adminBtn = document.getElementById('adminBtn');
+  const adminModal = document.getElementById('adminModal');
+  const closeBtn = document.getElementById('closeBtn');
+
+  // When Admin button is clicked, show the modal
+  adminBtn.addEventListener('click', () => {
+    adminModal.style.display = 'block';
+  });
+
+  // When Close button is clicked, hide the modal
+  closeBtn.addEventListener('click', () => {
+    adminModal.style.display = 'none';
+  });
+
+  // Optional: Close modal if user clicks outside of it
+  window.addEventListener('click', (e) => {
+    if (e.target === adminModal) {
+      adminModal.style.display = 'none';
+    }
+  });
 </script>
   </body>
   </html>
